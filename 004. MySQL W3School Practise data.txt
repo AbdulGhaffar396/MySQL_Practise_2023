@@ -1,0 +1,453 @@
+Microsoft Windows [Version 10.0.19045.3324]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Abdul>mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 5.5.5-10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE TABLE Customers (
+    -> CustomersID INT PRIMARY KEY,
+    -> CustomerName VARCHAR(255),
+    -> City VARCHAR(255),
+    -> Postalcode VARCHAR(10),
+    -> Country VARCHAR(255)
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> Show databases;
++---------------------+
+| Database            |
++---------------------+
+| 4 hours sql video   |
+| information_schema  |
+| mysql               |
+| mysql learning 2023 |
+| performance_schema  |
+| phpmyadmin          |
+| test                |
++---------------------+
+7 rows in set (0.01 sec)
+
+mysql> CREATE DATABASE MY_Learning;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use MY_Learning;
+Database changed
+mysql> CREATE TABLE Customers (
+    -> CustomersID INT PRIMARY KEY,
+    -> CustomerName VARCHAR(255),
+    -> City VARCHAR(255),
+    -> Postalcode VARCHAR(10),
+    -> Country VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW Customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Customers' at line 1
+mysql> INSERT INTO Customers (CustomerID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+    -> (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+    -> (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+    -> (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+    -> (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+    -> (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'field list'
+mysql> ALTER TABLE Customers CHANGE CustomerID CustomersID INT;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'customers'
+mysql> USE My_Learning;
+Database changed
+mysql> ALTER TABLE Customers
+    -> CHANGE CustomerID CustomersID INT;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'customers'
+mysql> INSERT INTO Customers (CustomersID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+    -> (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+    -> (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+    -> (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+    -> (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+    -> (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
+ERROR 1054 (42S22): Unknown column 'ContactName' in 'field list'
+mysql> ALTER TABLE Customers
+    -> ADD ContactName VARCHAR(255) AFTER CustomerName,
+    -> ADD Address VARCHAR(255) AFTER ContactName;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Customers;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO Customers (CustomersID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+    ->     -> (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+    ->     -> (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+    ->     -> (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+    ->     -> (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+    ->     -> (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-> (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '122...' at line 2
+mysql> INSERT INTO Customers (CustomersID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+    -> (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+    -> (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+    -> (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+    -> (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+    -> (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Customers;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT CustomerName, City FROM Customers;
++------------------------------------+-------------+
+| CustomerName                       | City        |
++------------------------------------+-------------+
+| Alfreds Futterkiste                | Berlin      |
+| Ana Trujillo Emparedados y helados | México D.F. |
+| Antonio Moreno Taquería            | México D.F. |
+| Around the Horn                    | London      |
+| Berglunds snabbköp                 | Lule?       |
++------------------------------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> # DISTINCT
+mysql> SELECT Country FROM Customers;
++---------+
+| Country |
++---------+
+| Germany |
+| Mexico  |
+| Mexico  |
+| UK      |
+| Sweden  |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT Country FROM Customers;
++---------+
+| Country |
++---------+
+| Germany |
+| Mexico  |
+| UK      |
+| Sweden  |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(DISTINCT Country) FROM Customers;
++-------------------------+
+| COUNT(DISTINCT Country) |
++-------------------------+
+|                       4 |
++-------------------------+
+1 row in set (0.01 sec)
+
+mysql> #WHERE STATEMENT
+mysql> SELECT * FROM Customers
+    -> WHERE Country='Mexico';
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName    | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo   | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno | Mataderos 2312                | México D.F. | 05023      | Mexico  |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerID=1;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'where clause'
+mysql> SELECT * FROM Customers
+    -> WHERE CustomersID=1;
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+| CustomersID | CustomerName        | ContactName  | Address       | City   | Postalcode | Country |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+|           1 | Alfreds Futterkiste | Maria Anders | Obere Str. 57 | Berlin | 12209      | Germany |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> # The following operators can be used in the WHERE clause:  =Equal >Greater than <Less than >=Greater than or equal <=Less than or equal <>Not equal. Note: In some versions of SQL this operator may be written as != BETWEENBetween a certain range LIKESearch for a pattern INTo specify multiple possible values for a column
+mysql> #SQL AND, OR and NOT Operators
+mysql> SELECT * FROM Customers
+    -> WHERE City='Berlin' OR City='München';
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+| CustomersID | CustomerName        | ContactName  | Address       | City   | Postalcode | Country |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+|           1 | Alfreds Futterkiste | Maria Anders | Obere Str. 57 | Berlin | 12209      | Germany |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> #The following SQL statement selects all fields from "Customers" where country is NOT "Germany"
+mysql> SELECT * FROM Customers
+    -> WHERE NOT Country='Germany';
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> #Combining AND, OR and NOT
+mysql> SELECT * FROM Customers
+    -> WHERE Country='Germany' AND (City='Berlin' OR City='München');
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+| CustomersID | CustomerName        | ContactName  | Address       | City   | Postalcode | Country |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+|           1 | Alfreds Futterkiste | Maria Anders | Obere Str. 57 | Berlin | 12209      | Germany |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE NOT Country='Germany' AND NOT Country='USA';
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> #SQL ORDER BY Keyword
+mysql> SELECT * FROM Customers
+    -> ORDER BY Country;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> ORDER BY Country DESC;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> ORDER BY Country, CustomerName;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> ORDER BY Country ASC, CustomerName DESC;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> #Question 1 , How will arrrnage itself when it was gonna arrange to another order
+mysql> #The INSERT INTO statement is used to insert new records in a table.
+mysql> INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+    -> VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO Customers (CustomerName, City, Country)
+    -> VALUES ('Cardinal', 'Stavanger', 'Norway');
+ERROR 1062 (23000): Duplicate entry '0' for key 'PRIMARY'
+mysql> #use the IS NULL and IS NOT NULL operators
+mysql> SELECT CustomerName, ContactName, Address
+    -> FROM Customers
+    -> WHERE Address IS NULL;
+Empty set (0.00 sec)
+
+mysql> SELECT CustomerName, ContactName, Address
+    -> FROM Customers
+    -> WHERE Address IS NOT NULL;
++------------------------------------+--------------------+-------------------------------+
+| CustomerName                       | ContactName        | Address                       |
++------------------------------------+--------------------+-------------------------------+
+| Cardinal                           | Tom B. Erichsen    | Skagen 21                     |
+| Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 |
+| Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 |
+| Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                |
+| Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               |
+| Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                |
++------------------------------------+--------------------+-------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> #The UPDATE statement is used to modify the existing records in a table.
+mysql> UPDATE Customers
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+    -> WHERE CustomerID = 1;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'where clause'
+mysql> UPDATE Customers
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+    -> WHERE CustomersID = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Customers;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           0 | Cardinal                           | Tom B. Erichsen    | Skagen 21                     | Stavanger   | 4006       | Norway  |
+|           1 | Alfreds Futterkiste                | Alfred Schmidt     | Obere Str. 57                 | Frankfurt   | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> #The following SQL statement will update the ContactName to "Juan" for all records where country is "Mexico":
+mysql> UPDATE Customers
+    -> SET ContactName='Juan'
+    -> WHERE Country='Mexico';
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from Customers;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           0 | Cardinal                           | Tom B. Erichsen    | Skagen 21                     | Stavanger   | 4006       | Norway  |
+|           1 | Alfreds Futterkiste                | Alfred Schmidt     | Obere Str. 57                 | Frankfurt   | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Juan               | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Juan               | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> #Be careful when updating records. If you omit the WHERE clause, ALL records will be updated!
+mysql> #
+mysql> #UPDATE Customers
+mysql> #SET ContactName='Juan';
+mysql> #The DELETE statement is used to delete existing records in a table.
+mysql> DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Customers;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           0 | Cardinal                           | Tom B. Erichsen    | Skagen 21                     | Stavanger   | 4006       | Norway  |
+|           2 | Ana Trujillo Emparedados y helados | Juan               | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Juan               | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM Customers;
+Query OK, 5 rows affected (0.00 sec)
+
+mysql> select * from Customers;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO Customers (CustomersID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+    -> (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+    -> (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+    -> (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+    -> (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+    -> (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Customers;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> #SQL TOP, LIMIT, FETCH FIRST or ROWNUM Clause
+mysql> #The SQL SELECT TOP Clause
+mysql> #The SELECT TOP clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.
+mysql> SELECT TOP 3 * FROM Customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '3 * FROM Customers' at line 1
+mysql> SELECT * FROM Customers
+    -> LIMIT 3;
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName    | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders   | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo   | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno | Mataderos 2312                | México D.F. | 05023      | Mexico  |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> FETCH FIRST 3 ROWS ONLY;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FETCH FIRST 3 ROWS ONLY' at line 2
+mysql> SELECT TOP 50 PERCENT * FROM Customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '50 PERCENT * FROM Customers' at line 1
+mysql> SELECT * FROM Customers
+    -> WHERE Country='Germany'
+    -> LIMIT 3;
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+| CustomersID | CustomerName        | ContactName  | Address       | City   | Postalcode | Country |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+|           1 | Alfreds Futterkiste | Maria Anders | Obere Str. 57 | Berlin | 12209      | Germany |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> #The SQL MIN() and MAX() Functions
+mysql> create table Products;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table Products (
+    -> ProductID INT PRIMARY KEY,
+    -> ProductName VARCHAR(220),
+    -> SupplierID INT,
+    -> CategoryID INT,
+    -> Unit VARCHAR(50),
+    -> Price INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Products (ProductID, ProductName, SupplierID, CategoryID, Unit, Price)
+    -> VALUES
+    -> (1, 'Chais', 1, 1, '10 boxes x 20 bags', 18),
+    -> (2, 'Chang', 1, 1, '24 - 12 oz bottles', 19),
+    -> (3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 10),
+    -> (4, 'Chef Anton\'s Cajun Seasoning', 2, 2, '48 - 6 oz jars', 22),
+    -> (5, 'Chef Anton\'s Gumbo Mix', 2, 2, '36 boxes', 21.35);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
