@@ -1,0 +1,541 @@
+Microsoft Windows [Version 10.0.19045.3324]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Abdul>mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 5.5.5-10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| 4 hours sql video   |
+| information_schema  |
+| my_learning         |
+| mysql               |
+| mysql learning 2023 |
+| performance_schema  |
+| phpmyadmin          |
+| test                |
++---------------------+
+8 rows in set (0.00 sec)
+
+mysql> use my_learning;
+Database changed
+mysql> select * from Products;
++-----------+------------------------------+------------+------------+---------------------+-------+
+| ProductID | ProductName                  | SupplierID | CategoryID | Unit                | Price |
++-----------+------------------------------+------------+------------+---------------------+-------+
+|         1 | Chais                        |          1 |          1 | 10 boxes x 20 bags  |    18 |
+|         2 | Chang                        |          1 |          1 | 24 - 12 oz bottles  |    19 |
+|         3 | Aniseed Syrup                |          1 |          2 | 12 - 550 ml bottles |    10 |
+|         4 | Chef Anton's Cajun Seasoning |          2 |          2 | 48 - 6 oz jars      |    22 |
+|         5 | Chef Anton's Gumbo Mix       |          2 |          2 | 36 boxes            |    21 |
++-----------+------------------------------+------------+------------+---------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT MIN(Price) AS SmallestPrice
+    -> FROM Products;
++---------------+
+| SmallestPrice |
++---------------+
+|            10 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> #The SQL MIN() and MAX() Functions
+mysql> The MIN() function returns the smallest value of the selected column.
+    ->
+    -> #The MAX() function returns the largest value of the selected column.
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'The MIN() function returns the smallest value of the selected column.' at line 1
+mysql> SELECT MAX(Price) AS LargestPrice
+    -> FROM Products;
++--------------+
+| LargestPrice |
++--------------+
+|           22 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> #SQL COUNT(), AVG() and SUM() Functions
+mysql> # The AVG() function returns the average value of a numeric column.
+mysql> # The COUNT() function returns the number of rows that matches a specified criterion.
+mysql> # The SUM() function returns the total sum of a numeric column.
+mysql> SELECT COUNT(ProductID)
+    -> FROM Products;
+ERROR 2013 (HY000): Lost connection to MySQL server during query
+No connection. Trying to reconnect...
+Connection id:    11
+Current database: my_learning
+
++------------------+
+| COUNT(ProductID) |
++------------------+
+|                5 |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT AVG(Price)
+    -> FROM Products;
++------------+
+| AVG(Price) |
++------------+
+|    18.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(Quantity)
+    -> FROM OrderDetails;
+ERROR 1146 (42S02): Table 'my_learning.orderdetails' doesn't exist
+mysql> SELECT SUM(Quantity)
+    -> FROM Products;
+ERROR 1054 (42S22): Unknown column 'Quantity' in 'field list'
+mysql> SELECT SUM(CategoryID)
+    ->
+    -> ;
+ERROR 1054 (42S22): Unknown column 'CategoryID' in 'field list'
+mysql> SELECT SUM(CategoryID)
+    -> FROM Products;
++-----------------+
+| SUM(CategoryID) |
++-----------------+
+|               8 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> # The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+mysql> # There are two wildcards often used in conjunction with the LIKE operator:
+mysql> ## The percent sign (%) represents zero, one, or multiple characters
+mysql> ## The underscore sign (_) represents one, single character
+mysql> #
+mysql> LIKE OperatorDescription
+    -> WHERE CustomerName LIKE 'a%'Finds any values that start with "a"
+    -> WHERE CustomerName LIKE '%a'Finds any values that end with "a"
+    -> WHERE CustomerName LIKE '%or%'Finds any values that have "or" in any position
+    -> WHERE CustomerName LIKE '_r%'Finds any values that have "r" in the second position
+    -> WHERE CustomerName LIKE 'a_%'Finds any values that start with "a" and are at least 2 characters in length
+    -> WHERE CustomerName LIKE 'a__%'Finds any values that start with "a" and are at least 3 characters in length
+    -> WHERE ContactName LIKE 'a%o'Finds any values that start with "a" and ends with "o";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'LIKE OperatorDescription
+WHERE CustomerName LIKE 'a%'Finds any values that st...' at line 1
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| 4 hours sql video   |
+| information_schema  |
+| my_learning         |
+| mysql               |
+| mysql learning 2023 |
+| performance_schema  |
+| phpmyadmin          |
+| test                |
++---------------------+
+8 rows in set (0.00 sec)
+
+mysql> use my_learning;
+Database changed
+mysql> select * from Customers;
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerName LIKE 'a%';
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName    | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders   | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo   | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy   | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerName LIKE '%a';
++-------------+-------------------------+----------------+----------------+-------------+------------+---------+
+| CustomersID | CustomerName            | ContactName    | Address        | City        | Postalcode | Country |
++-------------+-------------------------+----------------+----------------+-------------+------------+---------+
+|           3 | Antonio Moreno Taquería | Antonio Moreno | Mataderos 2312 | México D.F. | 05023      | Mexico  |
++-------------+-------------------------+----------------+----------------+-------------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerName LIKE '%or%';
++-------------+-------------------------+----------------+-----------------+-------------+------------+---------+
+| CustomersID | CustomerName            | ContactName    | Address         | City        | Postalcode | Country |
++-------------+-------------------------+----------------+-----------------+-------------+------------+---------+
+|           3 | Antonio Moreno Taquería | Antonio Moreno | Mataderos 2312  | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn         | Thomas Hardy   | 120 Hanover Sq. | London      | WA1 1DP    | UK      |
++-------------+-------------------------+----------------+-----------------+-------------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerName LIKE '_r%';
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+| CustomersID | CustomerName    | ContactName  | Address         | City   | Postalcode | Country |
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+|           4 | Around the Horn | Thomas Hardy | 120 Hanover Sq. | London | WA1 1DP    | UK      |
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerName LIKE 'a__%';
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName    | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders   | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo   | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy   | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE ContactName LIKE 'a%o';
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName    | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo   | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno | Mataderos 2312                | México D.F. | 05023      | Mexico  |
++-------------+------------------------------------+----------------+-------------------------------+-------------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE CustomerName NOT LIKE 'a%';
++-------------+--------------------+--------------------+----------------+-------+------------+---------+
+| CustomersID | CustomerName       | ContactName        | Address        | City  | Postalcode | Country |
++-------------+--------------------+--------------------+----------------+-------+------------+---------+
+|           5 | Berglunds snabbköp | Christina Berglund | Berguvsvägen 8 | Lule? | S-958 22   | Sweden  |
++-------------+--------------------+--------------------+----------------+-------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> # Wildcard characters are used with the LIKE operator. The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+mysql> # Wildcard Characters in MS Access
+mysql> SymbolDescriptionExample
+    -> *Represents zero or more charactersbl* finds bl, black, blue, and blob
+    -> ?Represents a single characterh?t finds hot, hat, and hit
+    -> []Represents any single character within the bracketsh[oa]t finds hot and hat, but not hit
+    -> !Represents any character not in the bracketsh[!oa]t finds hit, but not hot and hat
+    -> -Represents any single character within the specified rangec[a-b]t finds cat and cbt
+    -> #Represents any single numeric character2#5 finds 205, 215, 225, 235, 245, 255, 265, 275, 285, and 295;
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SymbolDescriptionExample
+*Represents zero or more charactersbl* finds bl, bla...' at line 1
+mysql> #Wildcard Characters in SQL Server
+mysql> SymbolDescriptionExample
+    -> %Represents zero or more charactersbl% finds bl, black, blue, and blob
+    -> _Represents a single characterh_t finds hot, hat, and hit
+    -> []Represents any single character within the bracketsh[oa]t finds hot and hat, but not hit
+    -> ^Represents any character not in the bracketsh[^oa]t finds hit, but not hot and hat
+    -> -Represents any single character within the specified rangec[a-b]t finds cat and cbt;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SymbolDescriptionExample
+%Represents zero or more charactersbl% finds bl, bla...' at line 1
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE 'ber%';
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+| CustomersID | CustomerName        | ContactName  | Address       | City   | Postalcode | Country |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+|           1 | Alfreds Futterkiste | Maria Anders | Obere Str. 57 | Berlin | 12209      | Germany |
++-------------+---------------------+--------------+---------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '%es%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '_ondon';
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+| CustomersID | CustomerName    | ContactName  | Address         | City   | Postalcode | Country |
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+|           4 | Around the Horn | Thomas Hardy | 120 Hanover Sq. | London | WA1 1DP    | UK      |
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE 'L_n_on';
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+| CustomersID | CustomerName    | ContactName  | Address         | City   | Postalcode | Country |
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+|           4 | Around the Horn | Thomas Hardy | 120 Hanover Sq. | London | WA1 1DP    | UK      |
++-------------+-----------------+--------------+-----------------+--------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '[bsp]%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '[a-c]%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '[!bsp]%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City NOT LIKE '[bsp]%';
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '[a-c]%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE City LIKE '[!bsp]%';
+Empty set (0.00 sec)
+
+mysql> #question 1
+mysql> # above answer is not correct, why ?
+mysql> SELECT * FROM Customers
+    -> WHERE City NOT LIKE '[bsp]%';
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           1 | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           4 | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> # The SQL IN Operator
+mysql> The IN operator allows you to specify multiple values in a WHERE clause.
+    ->
+    -> The IN operator is a shorthand for multiple OR conditions.
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'The IN operator allows you to specify multiple values in a WHERE clause.
+
+The...' at line 1
+mysql> SELECT * FROM Customers
+    -> WHERE Country IN ('Germany', 'France', 'UK');
++-------------+---------------------+--------------+-----------------+--------+------------+---------+
+| CustomersID | CustomerName        | ContactName  | Address         | City   | Postalcode | Country |
++-------------+---------------------+--------------+-----------------+--------+------------+---------+
+|           1 | Alfreds Futterkiste | Maria Anders | Obere Str. 57   | Berlin | 12209      | Germany |
+|           4 | Around the Horn     | Thomas Hardy | 120 Hanover Sq. | London | WA1 1DP    | UK      |
++-------------+---------------------+--------------+-----------------+--------+------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE Country NOT IN ('Germany', 'France', 'UK');
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+| CustomersID | CustomerName                       | ContactName        | Address                       | City        | Postalcode | Country |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+|           2 | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+|           3 | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+|           5 | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Lule?       | S-958 22   | Sweden  |
++-------------+------------------------------------+--------------------+-------------------------------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Customers
+    -> WHERE Country IN (SELECT Country FROM Suppliers );
+ERROR 1146 (42S02): Table 'my_learning.suppliers' doesn't exist
+mysql> #The SQL BETWEEN Operator
+mysql> The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+    ->
+    -> The BETWEEN operator is inclusive: begin and end values are included. ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'The BETWEEN operator selects values within a given range. The values can be n...' at line 1
+mysql> SELECT * FROM Products
+    -> WHERE Price BETWEEN 10 AND 20;
++-----------+---------------+------------+------------+---------------------+-------+
+| ProductID | ProductName   | SupplierID | CategoryID | Unit                | Price |
++-----------+---------------+------------+------------+---------------------+-------+
+|         1 | Chais         |          1 |          1 | 10 boxes x 20 bags  |    18 |
+|         2 | Chang         |          1 |          1 | 24 - 12 oz bottles  |    19 |
+|         3 | Aniseed Syrup |          1 |          2 | 12 - 550 ml bottles |    10 |
++-----------+---------------+------------+------------+---------------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products
+    -> WHERE Price NOT BETWEEN 10 AND 20;
++-----------+------------------------------+------------+------------+----------------+-------+
+| ProductID | ProductName                  | SupplierID | CategoryID | Unit           | Price |
++-----------+------------------------------+------------+------------+----------------+-------+
+|         4 | Chef Anton's Cajun Seasoning |          2 |          2 | 48 - 6 oz jars |    22 |
+|         5 | Chef Anton's Gumbo Mix       |          2 |          2 | 36 boxes       |    21 |
++-----------+------------------------------+------------+------------+----------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products
+    -> WHERE Price BETWEEN 10 AND 20
+    -> AND CategoryID NOT IN (1,2,3);
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Products
+    -> WHERE ProductName BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+    -> ORDER BY ProductName;
++-----------+------------------------------+------------+------------+--------------------+-------+
+| ProductID | ProductName                  | SupplierID | CategoryID | Unit               | Price |
++-----------+------------------------------+------------+------------+--------------------+-------+
+|         1 | Chais                        |          1 |          1 | 10 boxes x 20 bags |    18 |
+|         2 | Chang                        |          1 |          1 | 24 - 12 oz bottles |    19 |
+|         4 | Chef Anton's Cajun Seasoning |          2 |          2 | 48 - 6 oz jars     |    22 |
+|         5 | Chef Anton's Gumbo Mix       |          2 |          2 | 36 boxes           |    21 |
++-----------+------------------------------+------------+------------+--------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products
+    -> WHERE ProductName BETWEEN "Carnarvon Tigers" AND "Chef Anton's Cajun Seasoning"
+    -> ORDER BY ProductName;
++-----------+------------------------------+------------+------------+--------------------+-------+
+| ProductID | ProductName                  | SupplierID | CategoryID | Unit               | Price |
++-----------+------------------------------+------------+------------+--------------------+-------+
+|         1 | Chais                        |          1 |          1 | 10 boxes x 20 bags |    18 |
+|         2 | Chang                        |          1 |          1 | 24 - 12 oz bottles |    19 |
+|         4 | Chef Anton's Cajun Seasoning |          2 |          2 | 48 - 6 oz jars     |    22 |
++-----------+------------------------------+------------+------------+--------------------+-------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT * FROM Orders
+    -> WHERE OrderDate BETWEEN #07/01/1996# AND #07/31/1996#;
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+mysql> #SQL aliases are used to give a table, or a column in a table, a temporary name.
+mysql> #SQL aliases are used to give a table, or a column in a table, a temporary name.;
+mysql> SELECT CustomerID AS ID, CustomerName AS Customer
+    -> FROM Customers;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'field list'
+mysql> SELECT CustomersID AS ID, CustomerName AS Customer
+    -> FROM Customers;
++----+------------------------------------+
+| ID | Customer                           |
++----+------------------------------------+
+|  1 | Alfreds Futterkiste                |
+|  2 | Ana Trujillo Emparedados y helados |
+|  3 | Antonio Moreno Taquería            |
+|  4 | Around the Horn                    |
+|  5 | Berglunds snabbköp                 |
++----+------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT CustomerName AS Customer, ContactName AS [Contact Person]
+    -> FROM Customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[Contact Person]
+FROM Customers' at line 1
+mysql> SELECT CustomerName AS Customer, ContactName AS Contact_Person
+    -> FROM Customers;
++------------------------------------+--------------------+
+| Customer                           | Contact_Person     |
++------------------------------------+--------------------+
+| Alfreds Futterkiste                | Maria Anders       |
+| Ana Trujillo Emparedados y helados | Ana Trujillo       |
+| Antonio Moreno Taquería            | Antonio Moreno     |
+| Around the Horn                    | Thomas Hardy       |
+| Berglunds snabbköp                 | Christina Berglund |
++------------------------------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country AS Address
+    -> FROM Customers;
++------------------------------------+---------+
+| CustomerName                       | Address |
++------------------------------------+---------+
+| Alfreds Futterkiste                |   12209 |
+| Ana Trujillo Emparedados y helados |    5021 |
+| Antonio Moreno Taquería            |    5023 |
+| Around the Horn                    |     120 |
+| Berglunds snabbköp                 |       0 |
++------------------------------------+---------+
+5 rows in set, 32 warnings (0.01 sec)
+
+mysql> SELECT CustomerName, CONCAT(Address,', ',PostalCode,', ',City,', ',Country) AS Address
+    -> FROM Customers;
++------------------------------------+-----------------------------------------------------------+
+| CustomerName                       | Address                                                   |
++------------------------------------+-----------------------------------------------------------+
+| Alfreds Futterkiste                | Obere Str. 57, 12209, Berlin, Germany                     |
+| Ana Trujillo Emparedados y helados | Avda. de la Constitución 2222, 05021, México D.F., Mexico |
+| Antonio Moreno Taquería            | Mataderos 2312, 05023, México D.F., Mexico                |
+| Around the Horn                    | 120 Hanover Sq., WA1 1DP, London, UK                      |
+| Berglunds snabbköp                 | Berguvsvägen 8, S-958 22, Lule?, Sweden                   |
++------------------------------------+-----------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> # The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+mysql> SELECT COUNT(CustomerID), Country
+    -> FROM Customers
+    -> GROUP BY Country;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'field list'
+mysql> SELECT COUNT(CustomersID), Country
+    -> FROM Customers
+    -> GROUP BY Country;
++--------------------+---------+
+| COUNT(CustomersID) | Country |
++--------------------+---------+
+|                  1 | Germany |
+|                  2 | Mexico  |
+|                  1 | Sweden  |
+|                  1 | UK      |
++--------------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(CustomerID), Country
+    -> FROM Customers
+    -> GROUP BY Country
+    -> ORDER BY COUNT(CustomerID) DESC;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'field list'
+mysql> SELECT COUNT(CustomersID), Country
+    -> FROM Customers
+    -> GROUP BY Country
+    -> ORDER BY COUNT(CustomerID) DESC;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'order clause'
+mysql> ORDER BY COUNT(CustomersID) DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY COUNT(CustomersID) DESC' at line 1
+mysql> SELECT COUNT(CustomersID), Country
+    -> FROM Customers
+    -> GROUP BY Country
+    -> ORDER BY COUNT(CustomerID) DESC;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'order clause'
+mysql> SELECT COUNT(CustomersID), Country
+    -> FROM Customers
+    -> GROUP BY Country
+    -> ORDER BY COUNT(CustomersID) DESC;
++--------------------+---------+
+| COUNT(CustomersID) | Country |
++--------------------+---------+
+|                  2 | Mexico  |
+|                  1 | Germany |
+|                  1 | UK      |
+|                  1 | Sweden  |
++--------------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> # The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+mysql> SELECT COUNT(CustomersID), Country
+    -> FROM Customers
+    -> GROUP BY Country
+    -> HAVING COUNT(CustomersID) > 5;
+Empty set (0.00 sec)
+
+mysql>
