@@ -1,0 +1,356 @@
+Microsoft Windows [Version 10.0.19044.2251]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Abdul>mysql -u root -p
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ag                 |
+| codanicsdb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use codanicsdb;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_codanicsdb |
++----------------------+
+| students             |
++----------------------+
+1 row in set (0.01 sec)
+
+mysql> create table students (
+    -> StuID int,
+    -> StuNAME varchar(45),
+    -> stuAGE int,
+    -> stuCITY varchar(50));
+ERROR 1050 (42S01): Table 'students' already exists
+mysql> create table Ghaffar (
+    -> StuID int,
+    -> stuNAME varchar(45),
+    -> stuAGE int,
+    -> stuCITY varchar(50));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DESC Ghaffar;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| StuID   | int         | YES  |     | NULL    |       |
+| stuNAME | varchar(45) | YES  |     | NULL    |       |
+| stuAGE  | int         | YES  |     | NULL    |       |
+| stuCITY | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> INSERT INTO Ghaffar(stuID, stuNAME, stuAGE, stuCITY) VALUES (1, 'Hamza', 24, 'Faisalabad');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_codanicsdb |
++----------------------+
+| ghaffar              |
+| students             |
++----------------------+
+2 rows in set (0.00 sec)
+
+mysql> DESC Ghaffar;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| StuID   | int         | YES  |     | NULL    |       |
+| stuNAME | varchar(45) | YES  |     | NULL    |       |
+| stuAGE  | int         | YES  |     | NULL    |       |
+| stuCITY | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    |
++-------+---------+--------+------------+
+|     1 | Hamza   |     24 | Faisalabad |
++-------+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql>  INSERT INTO Ghaffar(stuID, stuNAME, stuAGE, stuCITY) VALUES (2, 'Ali', 4, 'Lahore');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Ghaffar(stuID, stuNAME, stuAGE, stuCITY) VALUES (7, 'Bilal', 7, 'depalpur');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Ghaffar(stuID, stuNAME, stuAGE, stuCITY) VALUES (7, 'Bilal', 7, 'depalpur');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Ghaffar(stuID, stuNAME, stuAGE, stuCITY) VALUES (7, 'Bilal', 7, 'depalpur');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Ghaffar(stuID, stuNAME, stuAGE, stuCITY) VALUES (7, 'Bilal', 7, 'depalpur');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    |
++-------+---------+--------+------------+
+|     1 | Hamza   |     24 | Faisalabad |
+|     2 | Ali     |      4 | Lahore     |
+|     7 | Bilal   |      7 | depalpur   |
+|     7 | Bilal   |      7 | depalpur   |
+|     7 | Bilal   |      7 | depalpur   |
+|     7 | Bilal   |      7 | depalpur   |
++-------+---------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT stuNAME FROM Ghaffar;
++---------+
+| stuNAME |
++---------+
+| Hamza   |
+| Ali     |
+| Bilal   |
+| Bilal   |
+| Bilal   |
+| Bilal   |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT stuAGE Ghaffar;
+ERROR 1054 (42S22): Unknown column 'stuAGE' in 'field list'
+mysql> SELECT stuAGE FROM Ghaffar;
++--------+
+| stuAGE |
++--------+
+|     24 |
+|      4 |
+|      7 |
+|      7 |
+|      7 |
+|      7 |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT stuAGE FROM Ghaffar where stuAGE <20;
++--------+
+| stuAGE |
++--------+
+|      4 |
+|      7 |
+|      7 |
+|      7 |
+|      7 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar where stuAGE <20;
++-------+---------+--------+----------+
+| StuID | stuNAME | stuAGE | stuCITY  |
++-------+---------+--------+----------+
+|     2 | Ali     |      4 | Lahore   |
+|     7 | Bilal   |      7 | depalpur |
+|     7 | Bilal   |      7 | depalpur |
+|     7 | Bilal   |      7 | depalpur |
+|     7 | Bilal   |      7 | depalpur |
++-------+---------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar where stuAGE >20;
++-------+---------+--------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    |
++-------+---------+--------+------------+
+|     1 | Hamza   |     24 | Faisalabad |
++-------+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar where stuAGE >20;
++-------+---------+--------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    |
++-------+---------+--------+------------+
+|     1 | Hamza   |     24 | Faisalabad |
++-------+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE Ghaffar ADD COLUM stuCOUNTRY TEXT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'stuCOUNTRY TEXT' at line 1
+mysql> ALTER TABLE Ghaffar ADD COLUMN stuCOUNTRY TEXT;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Ghaffar;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| StuID      | int         | YES  |     | NULL    |       |
+| stuNAME    | varchar(45) | YES  |     | NULL    |       |
+| stuAGE     | int         | YES  |     | NULL    |       |
+| stuCITY    | varchar(50) | YES  |     | NULL    |       |
+| stuCOUNTRY | text        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELCT * FROM Ghaffar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELCT * FROM Ghaffar' at line 1
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | NULL       |
+|     2 | Ali     |      4 | Lahore     | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
++-------+---------+--------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE Ghaffar SET stuCOUNTRY = "Pakistan" WHERE StuID=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | Lahore     | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
+|     7 | Bilal   |      7 | depalpur   | NULL       |
++-------+---------+--------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE Ghaffar SET stuCOUNTRY = "Pakistan" WHERE StuAGE=7;
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | Lahore     | NULL       |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
++-------+---------+--------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE Ghaffar SET stuCOUNTRY = "Pakistan" WHERE StuAGE=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | Lahore     | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   | Pakistan   |
++-------+---------+--------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE Ghaffar SET stuCOUNTRY = "" WHERE StuAGE=7;
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> SELECT * FROM students;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | Lahore     | Pakistan   |
+|     7 | Bilal   |      7 | depalpur   |            |
+|     7 | Bilal   |      7 | depalpur   |            |
+|     7 | Bilal   |      7 | depalpur   |            |
+|     7 | Bilal   |      7 | depalpur   |            |
++-------+---------+--------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM Ghaffar WHERE stuCOUNTRY ="";
+Query OK, 4 rows affected (0.00 sec)
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | Lahore     | Pakistan   |
++-------+---------+--------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Ghaffar
+    -> ADD email VARCHAR(100)
+    -> AFTER stuAGE;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from Ghaffar;
++-------+---------+--------+-------+------------+------------+
+| StuID | stuNAME | stuAGE | email | stuCITY    | stuCOUNTRY |
++-------+---------+--------+-------+------------+------------+
+|     1 | Hamza   |     24 | NULL  | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | NULL  | Lahore     | Pakistan   |
++-------+---------+--------+-------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Ghaffar DROP email;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW * FROM Ghaffar;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* FROM Ghaffar' at line 1
+mysql> SELECT * FROM Ghaffar;
++-------+---------+--------+------------+------------+
+| StuID | stuNAME | stuAGE | stuCITY    | stuCOUNTRY |
++-------+---------+--------+------------+------------+
+|     1 | Hamza   |     24 | Faisalabad | Pakistan   |
+|     2 | Ali     |      4 | Lahore     | Pakistan   |
++-------+---------+--------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Ghaffar
+    -> CHANGE stuAGE
+    -> stu_umar VARCHAR(100);
+Query OK, 2 rows affected (0.06 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Ghaffar;
++-------+---------+----------+------------+------------+
+| StuID | stuNAME | stu_umar | stuCITY    | stuCOUNTRY |
++-------+---------+----------+------------+------------+
+|     1 | Hamza   | 24       | Faisalabad | Pakistan   |
+|     2 | Ali     | 4        | Lahore     | Pakistan   |
++-------+---------+----------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> QUIT
+Bye
+
+C:\Users\Abdul>

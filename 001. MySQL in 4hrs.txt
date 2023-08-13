@@ -1,0 +1,116 @@
+MYSQL Codes from 4 hours video 
+
+
+
+insert into student values(4, 'jack', 'Biology'); 
+insert into student values(5, 'Mike', 'Computer Science'); 
+
+Updating and deleting 
+
+update student 
+set major = 'Bio'
+where major = 'Biology';
+
+or 
+
+update student 
+set major = 'Comp Sci'
+where student_id = 4;
+
+update student 
+set major = 'Biochemistry'
+where major = 'Bio' OR major = 'Chemistry';
+
+update student 
+set name = 'Tom', major = 'undecided'
+where student_id = 1 ;
+
+update student 
+set major ='undecided';
+
+Delete from student
+where student_id = 5;
+
+Delete from student
+where name = 'Tom' and major = 'undecide';
+
+select student.name, student.major from student
+ORDER by name DESC;
+
+select * from student order by major, student_id DESC;
+
+select * from student WHERE MAJOR = 'Biology';
+
+select name, major from student where major = 'chemistry' or major= 'Biology' ;
+
+select * from student where student_id < 3;
+
+select * from student where student_id < 3 AND name <> 'jack';
+
+Relational operators
+
+<  less than
+<= less than or equal to
+> greater than
+>= greater than or equal to
+== equal to
+/= not equal to
+!= different
+=== identical (Since Groovy 3.0.0)
+!== not identical (Since Groovy 3.0.0)
+
+arithmetic operators
++=
+-=
+*=
+/=
+%=
+**=
+
+select * from student where major IN ('Biology', 'Chemistry') AND student_id > 2;
+
+COMPLEX COMPANY DATA PRACTISE 
+
+create table employee (
+    emp_id INT primary key,
+    first_name varchar(40),
+    last_name varchar(40),
+    birth_day DATE,
+    sex varchar(1),
+    salary INT,
+    Super_id INT,
+    Branch_id INT
+    );
+
+create table branch (
+    branch_id INT PRIMARY KEY, 
+    branch_name VARCHAR(40),
+    mgr_id INT,
+    mgr_start_date DATE,
+    FOREIGN KEY(Mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+    );
+    
+ALTER table employee
+ADD FOREIGN KEY(branch_id)
+REFERENCES branch(branch_id)
+ON DELETE SET NULL;
+ 
+ALTER table employee ADD FOREIGN KEY(super_id) REFERENCES employee(emp_id) ON DELETE SET NULL;
+
+CREATE TABLE client (
+    client_id INT PRIMARY KEY,
+    client_name VARCHAR(40),
+    branch_id INT,
+    FOREIGN KEY(branch_id) REFERENCES branch(branch_id) ON DELETE SET NULL
+    );
+
+CREATE TABLE works_with (
+    emp_id INT,
+    client_id INT,
+    total_sales INT
+ );
+    PRIMARY KEY(emp_id),
+    FOREIGN KEY(emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
+    FOREIGN KEY(client_id) REFERENCES client(client_id) ON DELETE CASCADE
+    );
+

@@ -1,0 +1,69 @@
+--CREATE TABLE WORKERS (
+  --EmployeeID INTEGER,
+  --FirstName text,
+  --LastName text,
+  --Salary float,
+  --JoinigDate datetime,
+  --Department text,
+  --Gender text
+--);
+--INSERT INTO WORKERS VALUES 
+--(1,'Vikas','Ahlawat',600000.00,'2013-02-15 11:16:28.290','IT','Male'),
+--(2,'nikita','Jain',530000.00,'2014-01-09 17:31:07.793','HR','Female'),
+--(3,'Ashish','Kumar',1000000.00,'2014-01-09 10:05:07.793','IT','Male'),
+--(4,'Nikhil','Shama',480000.00,'2014-01-09 09:00:07.793','HR','Male'),
+--(5,'anish','Kadian',500000.00,'2014-01-09 09:31:07.793','Payroll','Male');
+--SELECT * FROM WORKERS;
+-- Q1: Write a query to get all employee detail from "WORKERS" table
+--SELECT * FROM WORKERS;
+--Q2: Write a query to get only "FirstName" column from "WORKERS" table
+--SELECT FirstName FROM WORKERS;
+--Q3 Write a query to get FirstName in upper case as "First Name".
+--SELECT UPPER(FirstName) AS FirstName FROM WORKERS;
+--Q4: Write a query to get FirstName in lower case as "First Name".
+--SELECT LOWER(FirstName) AS FirstName FROM WORKERS;
+--Q5. Write a query for combine FirstName and LastName and display it as "Name" (also 
+--include white space between first name & last name)
+--SELECT CONCAT(FirstName ,' ', LastName) AS Nam FROM WORKERS;
+--Q6: Select WORKERS whose name is "Vikas"
+--SELECT * FROM WORKERS WHERE FirstName = 'Vikas'
+SELECT * FROM WORKERS;
+--Q7: Get all employee detail from WORKERS table whose "FirstName" start with 
+--latter 'a'.
+--SELECT * FROM WORKERS WHERE FirstName like 'a%'
+--Q8: Get all employee details from WORKERS table whose "FirstName" contains 
+--'k'
+--SELECT * FROM WORKERS WHERE firstname like '%k%';
+--Q9: 9. Get all employee details from EmployeeDetail table whose "FirstName" end with 
+--'h'
+--SELECT * FROM WORKERS WHERE FirstName like '%h'
+--Q10: Get all employee detail from WORKERS table whose "FirstName" start with 
+--any single character between 'a-p'
+--SELECT * FROM WORKERS WHERE FirstName like 'a%p';
+SELECT * FROM WORKERS;
+--Q11: Get all employee detail from EmployeeDetail table whose "FirstName" not start 
+---with any single character between 'a-p'
+--SELECT * FROM WORKERS WHERE FirstName like '[^a-b]%';
+--Q12: Get all employee detail from WORKERS table whose "Gender" end with 'le' 
+---and contain 4 letters. The Underscore(_) Wildcard Character represents any single 
+---character.
+--SELECT * FROM WORKERS WHERE Gender like '__le' --there are two "_"
+--SELECT * FROM WORKERS WHERE Gender like '____le' --there are two "_"
+--Q13: Get all employee detail from EmployeeDetail table whose "FirstName" start with 
+--'A' and contain 5 letters.
+--SELECT * FROM WORKERS WHERE FirstName like 'a____' --there are four "_"
+--Q14: Get all employee detail from WORKERS table whose "FirstName" 
+--containing '%'. ex:-"Vik%as".
+--SELECT * FROM WORKERS WHERE FirstName like '%[%]%'
+--Q15: Get all unique "Department" from EmployeeDetail table.COUNT
+--SELECT DISTINCT(Department) FROM WORKERS;
+--SELECT COUNT(DISTINCT Department) FROM WORKERS;
+--Q16: Get the highest "Salary" from EmployeeDetail table.
+--SELECT MAX(Salary) FROM WORKERS
+--Q17: Get the lowest "Salary" from EmployeeDetail table.
+--SELECT MIN(Salary) FROM WORKERS;
+--Q18: Show "JoiningDate" in "dd mmm yyyy" format, ex- "15 Feb 2013"
+--SELECT CONVERT(VARCHAR(20),JoiningDate,106) FROM WORKERS;
+--Q19: Show "JoiningDate" in "yyyy/mm/dd" format, ex- "2013/02/15"
+--SELECT CONVERT(VARCHAR(20),JoiningDate,111) FROM WORKERS;
+ 
